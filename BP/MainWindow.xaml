@@ -1,0 +1,145 @@
+﻿<Window x:Class="BP.MainWindow"
+        x:Name="main"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:BP"
+        mc:Ignorable="d" Loaded="Window_Loaded" Closing="DataWindow_Closing" 
+        Title="Hlavní okno" Height="618" Width="1168" MinWidth="700" MinHeight="550"
+        KeyDown="OnKeyDownHandler"
+        >
+
+    <Window.Resources>
+        <local:ProportionalConverter x:Key="ProportionalConverter"/>
+        <SolidColorBrush x:Key="Backdrop" Color="#1c1b21"/>
+        <SolidColorBrush x:Key="Menus" Color="#353b48"/>
+        <SolidColorBrush x:Key="TextBoxes" Color="#1c1b21"/>
+        <SolidColorBrush x:Key="Text" Color="White"/>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
+            </Grid.ColumnDefinitions>
+
+            <Menu Height="25">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel HorizontalAlignment="Left"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="Styl textu" Height="25">
+                    <MenuItem Header="Bold" IsCheckable="True" Checked="Bold_Checked" Unchecked="Bold_Unchecked" />
+                    <MenuItem Header="Italic" IsCheckable="True" Checked="Italic_Checked" Unchecked="Italic_Unchecked"/>
+                    <MenuItem Header="Zvětšit velikost fontu" Click="IncreaseFont_Click" />
+                    <MenuItem Header="Zmenšit velikost fontu" Click="DecreaseFont_Click" />
+                </MenuItem>
+
+
+                <MenuItem Header="Styl hledání" >
+                    <MenuItem Header="Pozadí" >
+                        <MenuItem Header="Bezbarvé" Click="NoneBackground_Found" />
+                        <MenuItem Header="Žluté" Click="YellowBackground_Found" />
+                        <MenuItem Header="Červené" Click="RedBackground_Found"/>
+                        <Separator/>
+                        <MenuItem Header="Fialové" Click="MagentaBackground_Found" />
+                    </MenuItem>
+                    <MenuItem Grid.Column="1" Header="Bold" IsCheckable="True" Checked="Bold_Checked_Found" Unchecked="Bold_Unchecked_Found"/>
+                    <MenuItem Header="Italic" IsCheckable="True" Checked="Italic_Checked_Found" Unchecked="Italic_Unchecked_Found"/>
+                </MenuItem>
+                <MenuItem x:Name ="ZoomBool" Header="Zapnout přibližování obrázku" IsCheckable="True"/>
+                <MenuItem Header="Načíst obrázek" Click="ImgChange" />
+            </Menu>
+            <Menu Grid.Column="1">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="Rejstřík" Click="Contents_Click"/>
+                <MenuItem x:Name="MISearch"  Header="Vyhledávání" Click="Search_Click"/>
+                <MenuItem Header="Nastavení" Click="Settings_Click"/>
+            </Menu>
+            <Menu Grid.Column="2">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel HorizontalAlignment="Right"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="Import dat" Click="OpenDatabase_Click"/>
+                <MenuItem Header="Předchozí záznam" Click="ButtonLast_Click"/>
+                <MenuItem Header="Následující záznam" Click="ButtonNext_Click"/>
+            </Menu>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+
+            <Image x:Name="ImgBox"
+                   HorizontalAlignment="Center" 
+                   Grid.Column="0" 
+                   Grid.Row="0" 
+                   Margin="5,5,5,5"
+                   MouseEnter="ImgBox_MouseEnter"
+                   MouseLeave="ImgBox_MouseLeave">
+                <xctk:MagnifierManager.Magnifier>
+                    <xctk:Magnifier Name="MyMagnifier" Radius="100" 
+                      ZoomFactor="0" BorderThickness="3"></xctk:Magnifier>
+                </xctk:MagnifierManager.Magnifier>
+
+            </Image>
+            <!--
+            <Canvas Name="TranspCanvas" Background="Transparent">
+                <Rectangle Fill="#80ff0000"
+                           Width="{Binding ActualWidth, ElementName=ImgBox,Converter={StaticResource ProportionalConverter}, ConverterParameter=1.0}"
+                           Height="{Binding ActualHeight, ElementName=ImgBox,Converter={StaticResource ProportionalConverter}, ConverterParameter=1.0}"
+                           Canvas.Left="{Binding ActualWidth, ElementName=TranspCanvas,Converter={StaticResource ProportionalConverter}, ConverterParameter=.025}"
+                           Canvas.Top="{Binding ActualHeight, ElementName=TranspCanvas,Converter={StaticResource ProportionalConverter}, ConverterParameter=.30}"
+                           />
+            </Canvas>
+            -->
+
+            <RichTextBox x:Name="TextBox1" 
+                         Grid.Column="2" 
+                         Grid.Row="0" 
+                         VerticalAlignment="Stretch" 
+                         HorizontalAlignment="Stretch" 
+                         VerticalScrollBarVisibility="Auto" 
+                         HorizontalScrollBarVisibility="Auto"  
+                         BorderThickness="0"
+                         Margin="5,5,5,5"
+                         Background="AntiqueWhite"
+                         PreviewKeyDown="PreviewKeyDown"
+                         >
+                <FlowDocument>
+                    <Paragraph>
+
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </Grid>
+        <StatusBar Grid.Row="2" x:Name="St">
+                <StatusBarItem x:Name="StatusBarI1"/>
+                <StatusBarItem x:Name="StatusBarI2"/>
+                <StatusBarItem x:Name="StatusBarI3" HorizontalAlignment="Right"/>
+            </StatusBar>
+        </Grid>
+</Window>

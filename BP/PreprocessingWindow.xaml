@@ -1,0 +1,55 @@
+﻿<Window x:Class="BP.PreprocessingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BP"
+        mc:Ignorable="d"
+        Title="Předzpracování dat" Height="300" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10">Název databáze</Label>
+            <TextBox x:Name="db_name" Grid.Column="1" Width="200" Height="20" HorizontalAlignment="Left" Margin="10" HorizontalContentAlignment="Center">Main</TextBox>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10">Typ poddatabáze</Label>
+            <TextBox x:Name="db_type" Grid.Column="1" Width="200" Height="20" HorizontalAlignment="Left" Margin="10" HorizontalContentAlignment="Center">Year</TextBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10">Typ záznamu</Label>
+            <TextBox x:Name="record_type" Grid.Column="1" Width="200" Height="20" HorizontalAlignment="Left" Margin="10" HorizontalContentAlignment="Center">Page</TextBox>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10">Elasticsearch index</Label>
+            <TextBox x:Name="es_index" Grid.Column="1" Width="200" Height="20" HorizontalAlignment="Left" Margin="10" HorizontalContentAlignment="Center">bp_data</TextBox>
+        </Grid>
+        <Button Grid.Row="4" Width="200" Height="20" Click="Button_Click">Načti a připrav data</Button>
+        
+    </Grid>
+</Window>

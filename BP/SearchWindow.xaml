@@ -1,0 +1,45 @@
+﻿<Window x:Class="BP.SearchWindow"
+        x:Name="main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BP"
+        mc:Ignorable="d"
+        Title="Vyhledávání" Height="220" Width="400" 
+        ResizeMode="NoResize">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Prohledávaná oblast:" VerticalAlignment="Top" Grid.Row="0" Margin="10,0,0,0"/>
+        <GroupBox Grid.Row="1" BorderThickness="0">
+            <UniformGrid Height="75" Columns="1" Margin="30,0,0,30">
+                <RadioButton x:Name="currentRB" Content="Aktuální záznam"/>
+                <RadioButton x:Name="allRB" Content="Všechny záznamy"/>
+                <RadioButton x:Name="inhaltRB" Content="Rejstříky"/>
+            </UniformGrid>
+        </GroupBox>
+        <Label Content="Způsob vyhledávání:" VerticalAlignment="Top" Grid.Row="0"  Grid.Column="1" Margin="10,0,0,0"/>
+        <GroupBox Grid.Row="1" Grid.Column="1" BorderThickness="0">
+            <UniformGrid Height="100" Grid.Column="1" Columns="1" Margin="30,0,0,0">
+                <RadioButton Content="Knuth Morris Pratt"/>
+                <RadioButton Content="Boyer Moore"/>
+                <RadioButton Content="Regulární výraz"/>
+                <RadioButton Content="Elasticsearch"/>
+            </UniformGrid>
+        </GroupBox>
+        <CheckBox x:Name="ElasticBool" Grid.Row="2" Content="Využít ElasticDB" Margin="300000,10,0,0"/>
+        <Label Target="{Binding ElementName=FindBox}" Grid.Row="2" Grid.ColumnSpan="2" Content="Hledaný text:" VerticalAlignment="Center" Margin="30,0,0,0"/>
+        <TextBox x:Name="FindBox" Grid.Row="2" Grid.ColumnSpan="2" Height="25" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" KeyDown="OnKeyDownHandler"/>
+        <Button x:Name="Search" Grid.Row="2" Grid.ColumnSpan="2" Content="Hledat" Click="Search_Click" Height="25" Width="100" HorizontalAlignment="Center" Margin="250,0,5,0"/>
+    </Grid>
+
+</Window>
